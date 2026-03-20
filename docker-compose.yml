@@ -1,5 +1,5 @@
 services:
-  app:
+  app_spmi:
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,11 +12,11 @@ services:
     volumes:
       - ./:/var/www/html
     depends_on:
-      - db
+      - db_spmi
     networks:
       - spmi-network
 
-  db:
+  db_spmi:
     image: mariadb
     container_name: spmi_db
     restart: always
@@ -28,6 +28,11 @@ services:
     volumes:
       - mysql-data:/var/lib/mariadb
       - ./spmi.sql:/docker-entrypoint-initdb.d/spmi.sql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5  
     networks:
       - spmi-network
 

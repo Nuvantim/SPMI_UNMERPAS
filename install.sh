@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set environment file
+mv .env.prod .env && \
+
 # Install production dependencies only
 composer install --no-dev --optimize-autoloader && \
 
