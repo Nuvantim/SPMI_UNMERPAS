@@ -1,28 +1,27 @@
 #!/bin/sh
 set -e
 
-# Configure PHP-FPM to run in non-daemon mode
-sed -i 's/;daemonize = yes/daemonize = no/g' /etc/php82/php-fpm.conf
-
 # Check if the application needs to be installed (using a flag file)
-if [ ! -f /var/www/html/.installed ]; then
+if [ ! -f /app/.installed ]; then
     echo "Running first-time installation..."
-    touch /var/www/html/.installed
-    sh /var/www/html/install.sh
+    touch /app/.installed
+    chmod +x /app/install.sh
+    sh /app/install.sh
 
     # Create group www-data
     adduser -D -u 1000 -G www-data www-data
-    sed -i 's/^user = nobody$/user = www-data/' /etc/php82/php-fpm.d/www.conf
-    sed -i 's/^group = nogroup$/group = www-data/' /etc/php82/php-fpm.d/www.conf
    
     # Set Permission
-    chown -R www-data:www-data /var/www/html
-    chmod -R 775 /var/www/html/public /var/www/html/storage /var/www/html/bootstrap/cache
-    chmod +x /var/www/html/install.sh
+    chown -R www-data:www-data /app
+    chmod -R 775 /app/public /app/storage /app/bootstrap/cache
+    apk del php83*
 fi
 
-# Start PHP-FPM in the background
-php-fpm82 &
+# Create Path Frankenphp
+export PATH=$PATH:/usr/bin
 
-# Start Nginx as the main foreground process
-exec nginx -g "daemon off;"
+# Start Frankenphp
+exec franken php-server --root /app/public --listen :80
+
+# Worker mode if needed
+#--worker /app/public/index.php,$(nproc)

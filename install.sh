@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Set environment file
 mv .env.prod .env && \
 
@@ -9,12 +8,8 @@ composer install --no-dev --optimize-autoloader && \
 # Generate application key first
 php artisan key:generate && \
 
-# Then clear and rebuild Laravel caches
+# Clear cache
 php artisan optimize:clear && \
-php artisan config:cache && \
-php artisan event:cache && \
-php artisan route:cache && \
-php artisan view:cache && \
 
-# Final application setup 
+# Activate storage link 
 php artisan storage:link
