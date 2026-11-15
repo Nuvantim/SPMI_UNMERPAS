@@ -2,62 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\pengisian;
-use App\Models\standard;
 use App\Models\indikator;
+use App\Models\pengisian;
 use App\Models\pengisian_berkas;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\standard;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BerkasController extends Controller
 {
     public function listBerkas()
     {
-        $standar = Standard::where('status',1)->get();
+        $standar = Standard::where('status', 1)->get();
         // $berkas = Pengisian::where('pegawai_id', Auth::user()->id)->orderBy('id', 'desc')->get();
         $berkas = Pengisian::where('program_studi', Auth::user()->prodi_id)->orderBy('id', 'desc')->get();
-        return view('admin.berkas.list_berkas', compact('berkas','standar'));
+        return view('admin.berkas.list_berkas', compact('berkas', 'standar'));
+
         // $berkas = Pengisian::with(['pegawai', 'auditor'])->where('pegawai_id', Auth::user()->id)->get();
     }
 
     public function addIndikator(Request $request)
     {
-        $cari_indikator = Indikator::where('standard_id', $request->standar_id)->where('status',1)->get();
-            if($cari_indikator->isEmpty()) {
-                Alert::error('Gagal', 'Standar tidak memiliki indikator');
-                return redirect()->route('berkas.index');
-            }
-
-            // Melakukan pengecekan dan pengisian untuk setiap indikator
-            $berhasil_ditambahkan = false; // Menyimpan status apakah ada indikator yang berhasil ditambahkan
-            foreach($cari_indikator as $indikator) {
-                $cek_pengisian = Pengisian::where('pegawai_id', Auth::user()->id)
-                    ->where('indikator_id', $indikator->id)
-                    ->where('tahun', now()->format('Y'))->first();
-
-                if ($cek_pengisian) {
-                    continue;
-                }else{
-                    $pengisian = new Pengisian;
-                    $pengisian->pegawai_id = Auth::user()->id;
-                    $pengisian->program_studi = Auth::user()->prodi_id;
-                    $pengisian->indikator_id = $indikator->id;
-                    $pengisian->tahun = now()->format('Y');
-                    $pengisian->aksi_code = 0;
-                    $pengisian->save();
-
-                    $berhasil_ditambahkan = true;
-                }
-            }
-
-            if($berhasil_ditambahkan) {
-                Alert::success('Sukses', 'Indikator Berhasil Ditambahkan');
-            } else {
-                Alert::error('Gagal', 'Standar ini sudah terdaftar di tahun ini');
-            }
-
+        $cari_indikator = Indikator::where('standard_id', $request->standar_id)->where('status', 1)->get();
+        if ($cari_indikator->isEmpty()) {
+            Alert::error('Gagal', 'Standar tidak memiliki indikator');
             return redirect()->route('berkas.index');
+        }
+
+        // Melakukan pengecekan dan pengisian untuk setiap indikator
+        $berhasil_ditambahkan = false; // Menyimpan status apakah ada indikator yang berhasil ditambahkan
+        foreach ($cari_indikator as $indikator) {
+            $cek_pengisian = Pengisian::where('pegawai_id', Auth::user()->id)
+                ->where('indikator_id', $indikator->id)
+                ->where('tahun', now()->format('Y'))
+                ->first();
+
+            if ($cek_pengisian) {
+                continue;
+            } else {
+                $pengisian = new Pengisian();
+                $pengisian->pegawai_id = Auth::user()->id;
+                $pengisian->program_studi = Auth::user()->prodi_id;
+                $pengisian->indikator_id = $indikator->id;
+                $pengisian->tahun = now()->format('Y');
+                $pengisian->aksi_code = 0;
+                $pengisian->save();
+
+                $berhasil_ditambahkan = true;
+            }
+        }
+
+        if ($berhasil_ditambahkan) {
+            Alert::success('Sukses', 'Indikator Berhasil Ditambahkan');
+        } else {
+            Alert::error('Gagal', 'Standar ini sudah terdaftar di tahun ini');
+        }
+
+        return redirect()->route('berkas.index');
 
         Alert::error('Gagal', 'Tidak ada indikator yang bisa ditambahkan');
         return redirect()->back();
@@ -65,10 +67,9 @@ class BerkasController extends Controller
 
     public function hapusIndikator($id)
     {
-        $pengisian =  Pengisian::find($id);
+        $pengisian = Pengisian::find($id);
         $pengisian_berkas = Pengisian_berkas::where('pengisian_id', $pengisian->id)->get();
-        foreach ($pengisian_berkas as $hapus_berkas)
-        {
+        foreach ($pengisian_berkas as $hapus_berkas) {
             $filepath = public_path('storage/Berkas/' . $hapus_berkas->nama_file);
             if (file_exists($filepath)) {
                 unlink($filepath);
@@ -89,7 +90,7 @@ class BerkasController extends Controller
     public function addPeningkatan($id)
     {
         $pengisian = Pengisian::find($id);
-        return view('admin.berkas.tambah_peningkatan',compact('pengisian'));
+        return view('admin.berkas.tambah_peningkatan', compact('pengisian'));
     }
 
     public function uploadFile(Request $request, $id)
@@ -118,7 +119,7 @@ class BerkasController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $hashName = md5($original . now()->format('dmY') . uniqid()) . '.' . $extension;
 
-                    $pengisian_berkas = new Pengisian_berkas;
+                    $pengisian_berkas = new Pengisian_berkas();
                     $pengisian_berkas->nama_file = $hashName;
                     $file->storeAs('Berkas', $hashName);
 
@@ -141,7 +142,6 @@ class BerkasController extends Controller
         }
 
         return redirect()->route('berkas.index');
-
     }
 
     public function uploadPeningkatan(Request $request, $id)
@@ -156,7 +156,7 @@ class BerkasController extends Controller
             // Menggunakan md5 untuk menghasilkan hashname yang pendek
             $hashName = md5($original . now() . uniqid()) . '.' . $extension;
 
-            $pengisian_berkas = new Pengisian_berkas;
+            $pengisian_berkas = new Pengisian_berkas();
             $pengisian_berkas->nama_file = $hashName;
             $fl->storeAs('Berkas', $hashName);
 
@@ -164,8 +164,8 @@ class BerkasController extends Controller
             $pengisian_berkas->pengisian_id = $pengisian->id;
             $pengisian_berkas->pegawai_id = Auth::user()->id;
             $pengisian_berkas->deskripsi = $request->deskripsi;
-            $pengisian_berkas->program_studi_id =  Auth::user()->prodi_id;
-            $pengisian_berkas->indikator_id =  $pengisian->indikator_id;
+            $pengisian_berkas->program_studi_id = Auth::user()->prodi_id;
+            $pengisian_berkas->indikator_id = $pengisian->indikator_id;
             $pengisian_berkas->nama_asli = $original;
             $pengisian_berkas->save();
         }
@@ -177,13 +177,12 @@ class BerkasController extends Controller
     {
         $pengisian_berkas = Pengisian_berkas::find($id);
         $filepath = public_path('storage/Berkas/' . $pengisian_berkas->nama_file);
-        if (file_exists($filepath)){
+        if (file_exists($filepath)) {
             unlink($filepath);
         }
         $pengisian_berkas->delete();
         Alert::success('Sukses', 'File Berkas Dihapus');
         return redirect()->route('berkas.index');
-
     }
 
     public function validasiBerkas($id)
@@ -194,6 +193,7 @@ class BerkasController extends Controller
         Alert::success('Sukses', 'Data berhasil Disimpan');
         return redirect()->route('berkas.index');
     }
+
     public function submitpeningkatan($id)
     {
         $berkas = Pengisian::find($id);

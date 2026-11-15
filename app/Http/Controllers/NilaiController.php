@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\nilai;
-use Illuminate\Support\Facades\Auth;
 use App\Models\indikator;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\nilai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NilaiController extends Controller
 {
@@ -16,7 +16,7 @@ class NilaiController extends Controller
     public function index()
     {
         $nilai = Nilai::get();
-        return view('admin.nilai.nilai',compact('nilai'));
+        return view('admin.nilai.nilai', compact('nilai'));
     }
 
     /**
@@ -34,7 +34,7 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        $nilai = new Nilai;
+        $nilai = new Nilai();
         $nilai->deskripsi = $request->deskripsi;
         $nilai->indikator_id = $request->indikator_id;
         $nilai->nilai = $request->nilai;
@@ -42,7 +42,6 @@ class NilaiController extends Controller
         $nilai->save();
         Alert::success('Sukses', 'Skor Nilai Disimpan');
         return redirect()->route('nilai.index');
-        
     }
 
     /**
@@ -75,8 +74,7 @@ class NilaiController extends Controller
         $nilai->status = $request->status;
         $nilai->save();
         Alert::success('Sukses', 'Skor Nilai Diperbarui');
-        return redirect()->route('nilai.index');  
-
+        return redirect()->route('nilai.index');
     }
 
     /**

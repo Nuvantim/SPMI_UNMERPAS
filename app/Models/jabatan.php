@@ -9,6 +9,6 @@ class jabatan extends Model
 {
     protected $table = 'jabatan';
     public $timestamps = false;
-    // use HasFactory;
 
+    // use HasFactory;
 }

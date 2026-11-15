@@ -9,6 +9,7 @@ class bobot_nilai extends Model
 {
     protected $table = 'bobot';
     public $timestamps = false;
+
     use HasFactory;
 
     public function indikator()

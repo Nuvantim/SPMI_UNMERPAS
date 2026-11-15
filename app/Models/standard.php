@@ -9,16 +9,19 @@ class standard extends Model
 {
     protected $table = 'standard';
     public $timestamps = false;
+
     use HasFactory;
 
     public function pegawai()
     {
-        return $this->belongsTo(User::class); 
+        return $this->belongsTo(User::class);
     }
+
     public function jabatan()
     {
         return $this->belongsTo(jabatan::class);
     }
+
     public function prodi()
     {
         return $this->belongsTo(prodi::class);

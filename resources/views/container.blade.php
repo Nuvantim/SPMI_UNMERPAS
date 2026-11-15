@@ -1,16 +1,16 @@
 @extends('layout.main')
 @section('tittle')
-Contoh
+    Contoh
 @endsection
 @section('judul')
-Judul
+    Judul
 @endsection
 @section('container')
-<div class="card">
-  <div class="card-header">
-  </div>
-  <div class="card-body">
-    <h1>Contoh</h1>
-  </div>
-</div>
+    <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body">
+            <h1>Contoh</h1>
+        </div>
+    </div>
 @endsection

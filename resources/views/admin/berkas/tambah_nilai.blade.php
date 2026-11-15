@@ -50,7 +50,7 @@
 
                 <div class="col-md-8">
                     <div class="form-group">
-                          <h4><strong>Komentar :</strong></h4>
+                        <h4><strong>Komentar :</strong></h4>
                         <br>
                         <textarea class="summernotet" name="komentar" class="form-control" required>{!! $pengisian->komentar !!}</textarea>
                     </div>

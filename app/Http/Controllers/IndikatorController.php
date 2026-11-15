@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\indikator;
 use App\Models\standard;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class IndikatorController extends Controller
@@ -25,7 +25,7 @@ class IndikatorController extends Controller
      */
     public function create()
     {
-        $standard = Standard::where('status',1)->orderBy('id', 'desc')->get();
+        $standard = Standard::where('status', 1)->orderBy('id', 'desc')->get();
         // $standard = Standard::where('pegawai_id', Auth::user()->id)->get();
 
         return view('admin.indikator.tambah_indikator', compact('standard'));
@@ -66,7 +66,7 @@ class IndikatorController extends Controller
     {
         $indikator = Indikator::find($indikator);
         // $standard = Standard::where('pegawai_id', Auth::user()->id)->get();
-        $standard = Standard::where('status',1)->orderBy('id', 'desc')->get();
+        $standard = Standard::where('status', 1)->orderBy('id', 'desc')->get();
         // $this->authorize('aksesIndikator',$indikator);
         return view('admin.indikator.edit_indikator', compact('indikator', 'standard'));
     }
@@ -95,15 +95,14 @@ class IndikatorController extends Controller
      */
     public function destroy($indikator)
     {
-        try{
+        try {
             $indikator = Indikator::find($indikator);
             $indikator->delete();
             Alert::success('Sukses', 'Indikator Dihapus');
             return redirect()->route('indikator.index');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Alert::error('Gagal', 'Tindakan ditolak');
             return redirect()->route('indikator.index');
         }
-       
     }
 }

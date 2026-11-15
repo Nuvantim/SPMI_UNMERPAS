@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\bookstandar;
-use App\Models\standard;
 use App\Models\jenis;
+use App\Models\standard;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BookstandardController extends Controller
 {
@@ -18,7 +18,7 @@ class BookstandardController extends Controller
     {
         // $bookstandar = Bookstandar::where('pegawai_id', Auth::user()->id)->get();
         $bookstandar = Bookstandar::get();
-        return view('admin.book.bookstandard.bukustandard',compact('bookstandar'));
+        return view('admin.book.bookstandard.bukustandard', compact('bookstandar'));
     }
 
     /**
@@ -26,10 +26,10 @@ class BookstandardController extends Controller
      */
     public function create()
     {
-        $standarbook =  Bookstandar::first();
-        $standard = Standard::where('status',1)->get();
+        $standarbook = Bookstandar::first();
+        $standard = Standard::where('status', 1)->get();
         $jenis = Jenis::get();
-        return view('admin.book.bookstandard.tambah_bookstandard', compact('standard', 'jenis','standarbook'));
+        return view('admin.book.bookstandard.tambah_bookstandard', compact('standard', 'jenis', 'standarbook'));
     }
 
     /**
@@ -37,7 +37,7 @@ class BookstandardController extends Controller
      */
     public function store(Request $request)
     {
-        $bookstandar = new Bookstandar;
+        $bookstandar = new Bookstandar();
         $bookstandar->pegawai_id = Auth::user()->id;
         $bookstandar->standard_id = $request->standar_id;
         $bookstandar->visi_misi = $request->visi_misi;
@@ -49,7 +49,6 @@ class BookstandardController extends Controller
         $bookstandar->save();
         Alert::success('Sukses', 'Buku Standar Disimpan');
         return redirect()->route('bookstandard.index');
-
     }
 
     /**
@@ -59,7 +58,7 @@ class BookstandardController extends Controller
     {
         $bookstandar = Bookstandar::find($bookstandar);
         $standard = Standard::get();
-        return view('admin.book.bookstandard.show_bookstandard',compact('bookstandar'));
+        return view('admin.book.bookstandard.show_bookstandard', compact('bookstandar'));
     }
 
     /**
@@ -68,8 +67,8 @@ class BookstandardController extends Controller
     public function edit($bookstandar)
     {
         $bookstandar = Bookstandar::find($bookstandar);
-        $standard = Standard::where('status',1)->get();
-        return view('admin.book.bookstandard.edit_bookstandard', compact('bookstandar','standard'));
+        $standard = Standard::where('status', 1)->get();
+        return view('admin.book.bookstandard.edit_bookstandard', compact('bookstandar', 'standard'));
     }
 
     /**
@@ -89,7 +88,6 @@ class BookstandardController extends Controller
         $bookstandar->save();
         Alert::success('Sukses', 'Buku Standar Diperbarui');
         return redirect()->route('bookstandard.index');
-
     }
 
     /**

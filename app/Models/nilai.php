@@ -9,6 +9,7 @@ class nilai extends Model
 {
     protected $table = 'nilai';
     public $timestamps = false;
+
     use HasFactory;
 
     public function indikator()

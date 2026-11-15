@@ -21,9 +21,9 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 </head>
 
 <body>
@@ -47,7 +47,7 @@
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-                    
+
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
@@ -147,7 +147,7 @@
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="#" id="2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                 <i class="font-24 mdi mdi-comment-processing"></i>
+                                <i class="font-24 mdi mdi-comment-processing"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end mailbox animated bounceInDown" aria-labelledby="2">
                                 <ul class="list-style-none">
@@ -289,7 +289,7 @@
                                         </span></a></li>
                                 <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i
                                             class="mdi mdi-emoticon-cool"></i><span class="hide-menu"> Font Awesome
-                                            Icons </span></a></li>
+                                        Icons </span></a></li>
                             </ul>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -574,7 +574,7 @@
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">James Anderson</h6>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        and type setting industry. </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-end">April 14, 2021</span>
                                             <button type="button" class="btn btn-cyan btn-sm text-white">Edit</button>
@@ -590,7 +590,7 @@
                                     <div class="comment-text active w-100">
                                         <h6 class="font-medium">Michael Jorden</h6>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        and type setting industry. </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-end">May 10, 2021</span>
                                             <button type="button" class="btn btn-cyan btn-sm text-white">Edit</button>
@@ -606,7 +606,7 @@
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">Johnathan Doeting</h6>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        and type setting industry. </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-end">August 1, 2021</span>
                                             <button type="button" class="btn btn-cyan btn-sm text-white">Edit</button>
@@ -628,7 +628,7 @@
                                                 <input type="checkbox" class="form-check-input" id="customCheck">
                                                 <label class="form-check-label w-100 mb-0 todo-label" for="customCheck">
                                                     <span class="todo-desc fw-normal">Lorem Ipsum is simply dummy text of the
-                                                        printing and typesetting industry.</span> <span
+                                                    printing and typesetting industry.</span> <span
                                                         class="badge rounded-pill bg-danger float-end">Today</span>
                                                 </label>
                                             </div>
@@ -656,7 +656,7 @@
                                                 <input type="checkbox" class="form-check-input" id="customCheck1">
                                                 <label class="form-check-label w-100 mb-0 todo-label" for="customCheck1">
                                                     <span class="todo-desc fw-normal">Lorem Ipsum is simply dummy text of the
-                                                        printing</span><span
+                                                    printing</span><span
                                                         class="badge rounded-pill bg-primary float-end">1 week
                                                     </span>
                                                 </label>
@@ -687,9 +687,9 @@
                                                 <input type="checkbox" class="form-check-input" id="customCheck3">
                                                 <label class="form-check-label w-100 mb-0 todo-label" for="customCheck3">
                                                     <span class="todo-desc fw-normal">Lorem Ipsum is simply dummy text of the
-                                                        printing </span> <span
+                                                    printing </span> <span
                                                         class="badge rounded-pill bg-warning float-end">2
-                                                        weeks</span>
+                                                    weeks</span>
                                                 </label>
                                             </div>
                                             <div class="item-date"> 26 jun 2021</div>
@@ -785,7 +785,7 @@
                                     <i class="fa fa-check-circle w-30px mt-1"></i>
                                     <div>
                                         <a href="#" class="mb-0 font-medium p-0">Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit.</a>
+                                        consectetur adipiscing elit.</a>
                                         <span class="text-muted">dolor sit amet, consectetur adipiscing</span>
                                     </div>
                                     <div class="ms-auto">
@@ -799,7 +799,7 @@
                                     <i class="fa fa-gift w-30px mt-1"></i>
                                     <div>
                                         <a href="#" class="mb-0 font-medium p-0">Congratulation Maruti, Happy
-                                            Birthday</a>
+                                        Birthday</a>
                                         <span class="text-muted">many many happy returns of the day</span>
                                     </div>
                                     <div class="ms-auto">
@@ -826,7 +826,7 @@
                                     <i class="fa fa-leaf w-30px mt-1"></i>
                                     <div>
                                         <a href="#" class="mb-0 font-medium p-0">Envato approved Maruti Admin
-                                            template</a>
+                                        template</a>
                                         <span class="text-muted">i am very happy to approved by TF</span>
                                     </div>
                                     <div class="ms-auto">
@@ -840,7 +840,7 @@
                                     <i class="fa fa-question-circle w-30px mt-1"></i>
                                     <div>
                                         <a href="#" class="mb-0 font-medium p-0"> I am alwayse here if you have any
-                                            question</a>
+                                        question</a>
                                         <span class="text-muted">we glad that you choose our template</span>
                                     </div>
                                     <div class="ms-auto">
@@ -942,7 +942,7 @@
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">James Anderson</h6>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        and type setting industry. </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-end">April 14, 2021</span>
                                             <button type="button" class="btn btn-cyan btn-sm text-white">Edit</button>
@@ -958,7 +958,7 @@
                                     <div class="comment-text active w-100">
                                         <h6 class="font-medium">Michael Jorden</h6>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        and type setting industry. </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-end">May 10, 2021</span>
                                             <button type="button" class="btn btn-cyan btn-sm text-white">Edit</button>
@@ -974,7 +974,7 @@
                                     <div class="comment-text w-100">
                                         <h6 class="font-medium">Johnathan Doeting</h6>
                                         <span class="mb-3 d-block">Lorem Ipsum is simply dummy text of the printing
-                                            and type setting industry. </span>
+                                        and type setting industry. </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-end">August 1, 2021</span>
                                             <button type="button" class="btn btn-cyan btn-sm text-white">Edit</button>

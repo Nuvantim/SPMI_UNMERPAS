@@ -6,8 +6,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <div class="card">
         <!-- <div class="card-header">
-        <h1>Dashboard</h1>
-      </div> -->
+              <h1>Dashboard</h1>
+            </div> -->
         <div class="card-body">
             <div class="panel-header bg-primary-gradient">
                 <div class="page-inner py-5">
@@ -100,18 +100,18 @@
                 </div>
             </div>
             <form method="get" action="{{ route('dashboard.index') }}" style="display: flex; flex-wrap: wrap;">
-                 @can('kelola statistik')
-                <div class="col-md-3 mb-4" style="flex: 2;">
-                    <label for="prodiSelector"><strong>Program Studi :</strong></label>
-                    <select class="form-control" name="bvyucf" id="prodiSelector">
-                        <option value={{ null }}>--Pilih Program Studi--</option>
-                        @foreach ($prodiList as $program_studi)
-                            <option value="{{ $program_studi->id }}"
-                                {{ request('prodi') == $program_studi->id ? 'selected' : '' }}>
-                                {{ $program_studi->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                @can('kelola statistik')
+                    <div class="col-md-3 mb-4" style="flex: 2;">
+                        <label for="prodiSelector"><strong>Program Studi :</strong></label>
+                        <select class="form-control" name="bvyucf" id="prodiSelector">
+                            <option value={{ null }}>--Pilih Program Studi--</option>
+                            @foreach ($prodiList as $program_studi)
+                                <option value="{{ $program_studi->id }}"
+                                    {{ request('prodi') == $program_studi->id ? 'selected' : '' }}>
+                                    {{ $program_studi->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 @endcan
                 <div class="col-md-3 mb-4" style="flex: 1; margin-right: 10px;">
                     <label for="yearSelector"><strong>Tahun :</strong></label>
@@ -234,4 +234,4 @@
         </script>
 
 
-    @endsection
+@endsection

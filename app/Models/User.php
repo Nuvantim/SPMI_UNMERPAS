@@ -10,14 +10,16 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Contracts\Role;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
+
     protected $table = 'pegawai';
     public $timestamps = false;
-    protected $fillable = ['prodi_id','nama', 'email','password', 'status'];
-
+    protected $fillable = ['prodi_id', 'nama', 'email', 'password', 'status'];
 
     // public function hasAnyRole($roles)
     // {
@@ -25,18 +27,21 @@ class User extends Authenticatable
     // }
     public function role()
     {
-        return $this->BelongsToMany(Role::class,'model_has_roles','model_id','role_id');
+        return $this->BelongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id');
     }
+
     public function prodi()
     {
         return $this->belongsTo(prodi::class);
     }
+
     public function scopeHasSingleRole($query)
     {
-    return $query->with('roles') // Eager load roles
-                 ->whereHas('roles', function ($query) {
-                     $query->havingRaw('count(*) = 1')->groupBy('id');
-                 });
+        return $query
+            ->with('roles') // Eager load roles
+            ->whereHas('roles', function ($query) {
+                $query->havingRaw('count(*) = 1')->groupBy('id');
+            });
     }
 
     /**
@@ -48,10 +53,6 @@ class User extends Authenticatable
     //     'email',
     //     'password',
     // ];
-
-    
-    
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -61,7 +62,6 @@ class User extends Authenticatable
     //     'password',
     //     'remember_token',
     // ];
-
     /**
      * The attributes that should be cast.
      *

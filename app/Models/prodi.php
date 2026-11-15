@@ -9,6 +9,7 @@ class prodi extends Model
 {
     protected $table = 'program_studi';
     public $timestamps = false;
+
     use HasFactory;
 
     public function fakultas()

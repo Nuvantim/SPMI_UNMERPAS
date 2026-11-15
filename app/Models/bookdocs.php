@@ -9,6 +9,7 @@ class bookdocs extends Model
 {
     protected $table = 'bookdocs';
     public $timestamps = false;
+
     use HasFactory;
 
     public function standard()

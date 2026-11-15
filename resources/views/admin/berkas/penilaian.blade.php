@@ -10,27 +10,27 @@
 @section('container')
     <div class="card">
         {{-- <div class="card-header">
-        </div> --}}
+            </div> --}}
         <div class="card-body">
             <div class="mb-3">
-            <label for="basicInput"><p>Visibility Column :</p></label><br>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="1">
-            <i class="fas fa-eye-slash"></i>Nama Kaprodi</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="2">
-            <i class="fas fa-eye-slash"></i>Standar</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="3">
-            <i class="fas fa-eye-slash"></i>Indikator</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="4">
-            <i class="fas fa-eye-slash"></i>Penetapan</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="5">
-            <i class="fas fa-eye-slash"></i>Pelaksanaan</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="6">
-            <i class="fas fa-eye-slash"></i>Auditor</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="7">
-            <i class="fas fa-eye-slash"></i>Evaluasi</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="8">
-            <i class="fas fa-eye-slash"></i>Komentar</button>
-        </div>
+                <label for="basicInput"><p>Visibility Column :</p></label><br>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="1">
+                    <i class="fas fa-eye-slash"></i>Nama Kaprodi</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="2">
+                    <i class="fas fa-eye-slash"></i>Standar</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="3">
+                    <i class="fas fa-eye-slash"></i>Indikator</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="4">
+                    <i class="fas fa-eye-slash"></i>Penetapan</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="5">
+                    <i class="fas fa-eye-slash"></i>Pelaksanaan</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="6">
+                    <i class="fas fa-eye-slash"></i>Auditor</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="7">
+                    <i class="fas fa-eye-slash"></i>Evaluasi</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="8">
+                    <i class="fas fa-eye-slash"></i>Komentar</button>
+            </div>
             <div class="table-responsive">
                 <table id="contoh-datatables" class="table table-bordered table-striped">
                     <thead class="text-left thead-dark">
@@ -130,7 +130,7 @@
                                                     </button>
                                                 </form>
                                                 @if ($brks->nilai != null)
-                                                <form action="{{ route('penilaian.validasi', encrypt($brks->id)) }}"
+                                                    <form action="{{ route('penilaian.validasi', encrypt($brks->id)) }}"
                                                         method="POST" class="d-inline">
                                                         @csrf
                                                         <button class="btn btn-outline-danger" onclick="lockNilai(event)">
@@ -139,52 +139,52 @@
                                                         </button>
                                                     </form>
                                                 @endif
-                                        </div>
-                                    @elseif ($brks->aksi_code > 1)
-                                        <div class="alert alert-primary" role="alert">
-                                            <i class="fas fa-info-circle"></i>
-                                            <strong>Penilaian Tersimpan!</strong>
-                                        </div>
+                                            </div>
+                                        @elseif ($brks->aksi_code > 1)
+                                            <div class="alert alert-primary" role="alert">
+                                                <i class="fas fa-info-circle"></i>
+                                                <strong>Penilaian Tersimpan!</strong>
+                                            </div>
+                                        @endif
+                                    </td>
+                                </tr>
                             @endif
-                            </td>
-                            </tr>
-                        @endif
                         @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-<script type="text/javascript">
-    //tanya kunci
-    function lockNilai(event) {
-        event.preventDefault();
+    <script type="text/javascript">
+        //tanya kunci
+        function lockNilai(event) {
+            event.preventDefault();
 
-        submit_penilaian().then((confirmed) => {
-            if (confirmed) {
-                event.target.closest('form').submit();
-            }
-        });
-    }
-
-    function submit_penilaian() {
-        return new Promise((resolve) => {
-            Swal.fire({
-                title: 'Apakah anda yakin menyimpan penilaian evaluasi ini..?',
-                text: 'Data Penilaian disimpan permanen!',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Simpan!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    resolve(true); // Mengirimkan nilai true jika pengguna menekan tombol "Ya, Hapus!"
-                } else {
-                    resolve(false); // Mengirimkan nilai false jika pengguna menekan tombol pembatal
+            submit_penilaian().then((confirmed) => {
+                if (confirmed) {
+                    event.target.closest('form').submit();
                 }
             });
-        });
-    }
-</script>
+        }
+
+        function submit_penilaian() {
+            return new Promise((resolve) => {
+                Swal.fire({
+                    title: 'Apakah anda yakin menyimpan penilaian evaluasi ini..?',
+                    text: 'Data Penilaian disimpan permanen!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Simpan!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        resolve(true); // Mengirimkan nilai true jika pengguna menekan tombol "Ya, Hapus!"
+                    } else {
+                        resolve(false); // Mengirimkan nilai false jika pengguna menekan tombol pembatal
+                    }
+                });
+            });
+        }
+    </script>
 @endsection

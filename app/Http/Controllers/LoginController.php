@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\jabatan;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 class LoginController extends Controller
 {
@@ -18,6 +17,7 @@ class LoginController extends Controller
     {
         return view('login');
     }
+
     public function Authlogin(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -27,13 +27,12 @@ class LoginController extends Controller
 
         // $credential = $request->only('email','password');
         $user = User::where('email', $credentials['email'])->first();
-        if ($user && $user->status == 1){
-            if (Auth::attempt($credentials)) 
-            {
+        if ($user && $user->status == 1) {
+            if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 Alert::success('Selamat Datang', Auth::user()->nama);
                 return redirect()->route('dashboard.index');
-            }else{
+            } else {
                 Alert::error('Login Gagal', 'Periksa Username & Password anda');
                 return redirect()->back();
             }
@@ -41,7 +40,8 @@ class LoginController extends Controller
             Alert::error('Login Gagal', 'Akun telah dinonaktifkan, Silahkan hubungi Admin');
             return redirect()->back();
         }
-    }    
+    }
+
     public function Logout()
     {
         Auth::logout();

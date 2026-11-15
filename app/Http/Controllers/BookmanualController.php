@@ -6,8 +6,8 @@ use App\Models\bookmanual;
 use App\Models\jenis;
 use App\Models\standard;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BookmanualController extends Controller
 {
@@ -17,7 +17,7 @@ class BookmanualController extends Controller
     public function index()
     {
         $bookmanual = Bookmanual::get();
-        return view('admin.book.bookmanual.bukumanual',compact('bookmanual'));
+        return view('admin.book.bookmanual.bukumanual', compact('bookmanual'));
     }
 
     /**
@@ -25,11 +25,10 @@ class BookmanualController extends Controller
      */
     public function create()
     {
-        
         $manualbook = Bookmanual::first();
-        $standard = Standard::where('status',1)->get();
+        $standard = Standard::where('status', 1)->get();
         $jenis = Jenis::get();
-        return view('admin.book.bookmanual.tambah_bookmanual', compact('standard','jenis','manualbook'));
+        return view('admin.book.bookmanual.tambah_bookmanual', compact('standard', 'jenis', 'manualbook'));
     }
 
     /**
@@ -37,7 +36,7 @@ class BookmanualController extends Controller
      */
     public function store(Request $request)
     {
-        $bookmanual = new Bookmanual;
+        $bookmanual = new Bookmanual();
         $bookmanual->pegawai_id = Auth::user()->id;
         $bookmanual->ruanglingkup = $request->ruanglingkup;
         $bookmanual->standard_id = $request->standar_id;
@@ -50,7 +49,6 @@ class BookmanualController extends Controller
         $bookmanual->save();
         Alert::success('Sukses', 'Buku Manual Disimpan');
         return redirect()->route('bookmanual.index');
-
     }
 
     /**
@@ -60,8 +58,7 @@ class BookmanualController extends Controller
     {
         $bookmanual = Bookmanual::find($bookmanual);
         $standard = Standard::get();
-        return view('admin.book.bookmanual.show_bookmanual',compact('bookmanual','standard'));
-
+        return view('admin.book.bookmanual.show_bookmanual', compact('bookmanual', 'standard'));
     }
 
     /**
@@ -70,8 +67,8 @@ class BookmanualController extends Controller
     public function edit($bookmanual)
     {
         $bookmanual = Bookmanual::find($bookmanual);
-        $standard = Standard::where('status',1)->get();
-        return view('admin.book.bookmanual.edit_bookmanual', compact('bookmanual','standard')); 
+        $standard = Standard::where('status', 1)->get();
+        return view('admin.book.bookmanual.edit_bookmanual', compact('bookmanual', 'standard'));
     }
 
     /**

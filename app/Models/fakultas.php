@@ -10,5 +10,6 @@ class fakultas extends Model
 {
     protected $table = 'fakultas';
     public $timestamps = false;
+
     use HasFactory;
 }

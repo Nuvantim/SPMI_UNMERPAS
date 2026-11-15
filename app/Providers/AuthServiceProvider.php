@@ -7,7 +7,6 @@ namespace App\Providers;
 use App\Models\bookmanual;
 use App\Models\bookstandar;
 use App\Models\indikator;
-
 use App\Policies\AksesPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\App;
@@ -24,8 +23,6 @@ class AuthServiceProvider extends ServiceProvider
         Bookstandar::class => AksesPolicy::class,
         Indikator::class => AksesPolicy::class,
         Bookmanual::class => AksesPolicy::class,
-
-
     ];
 
     /**

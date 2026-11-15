@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\standard;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class StandardController extends Controller
@@ -32,7 +32,7 @@ class StandardController extends Controller
      */
     public function store(Request $request)
     {
-        $standar = new Standard;
+        $standar = new Standard();
         $standar->pegawai_id = Auth::user()->id;
         $standar->nama = $request->nama;
         $standar->status = $request->status;
@@ -53,9 +53,7 @@ class StandardController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(standard $standard)
-    {
-    }
+    public function edit(standard $standard) {}
 
     /**
      * Update the specified resource in storage.
@@ -75,12 +73,12 @@ class StandardController extends Controller
      */
     public function destroy($standard)
     {
-        try{
+        try {
             $standar = Standard::find($standard);
             Alert::success('Sukses', 'Standar Terhapus');
             $standar->delete();
             return redirect()->route('standard.index');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Alert::error('Gagal', 'Tindakan ditolak');
             return redirect()->route('standard.index');
         }

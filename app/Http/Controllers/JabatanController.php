@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use RealRashid\SweetAlert\Facades\Alert;
-
-
 
 class JabatanController extends Controller
 {
-
     public function index()
     {
-        $jabatan = Role::where('name','not like','%auditor%')->get();
-        return view('admin.jabatan.jabatan',compact('jabatan'));
+        $jabatan = Role::where('name', 'not like', '%auditor%')->get();
+        return view('admin.jabatan.jabatan', compact('jabatan'));
     }
 
     /**
@@ -24,7 +21,7 @@ class JabatanController extends Controller
     public function create()
     {
         $permission = Permission::all();
-        return view('admin.jabatan.tambah_jabatan',compact('permission'));
+        return view('admin.jabatan.tambah_jabatan', compact('permission'));
     }
 
     /**
@@ -58,12 +55,11 @@ class JabatanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit( $id)
+    public function edit($id)
     {
         $jabatan = Role::findById($id);
         $permission = Permission::all();
-        return view('admin.jabatan.edit_jabatan',compact('jabatan','permission'));
-        
+        return view('admin.jabatan.edit_jabatan', compact('jabatan', 'permission'));
     }
 
     /**
@@ -94,6 +90,6 @@ class JabatanController extends Controller
         $jabatan->syncPermissions([]);
         $jabatan->delete();
         Alert::success('Sukses', 'Jabatan Dihapus');
-        return redirect()->route('jabatan.index'); 
+        return redirect()->route('jabatan.index');
     }
 }

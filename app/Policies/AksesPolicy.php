@@ -20,12 +20,11 @@ class AksesPolicy
 
     public function aksesbookStandard(User $user, bookstandar $bookstandar)
     {
-
         return $user->id == $bookstandar->pegawai_id;
     }
+
     public function aksesbookManual(User $user, bookmanual $bookmanual)
     {
-
         return $user->id == $bookmanual->pegawai_id;
     }
 
@@ -33,7 +32,7 @@ class AksesPolicy
     {
         return $user->id == $standard->pegawai_id;
     }
-    
+
     public function __construct()
     {
         //

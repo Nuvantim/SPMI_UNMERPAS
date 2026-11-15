@@ -11,47 +11,47 @@
         <div class="card-body">
             <form action="{{ route('audhitor.store') }}" method="POST">
                 @csrf
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label for="basicInput"><h4><strong>Pilih Auditor :</strong></h4></label>
-                            <select class="form-control" id="jabatan_id" name="jabatan_id">
-                                @foreach ($roles as $jbt)
-                                    <option value="{{ $jbt->id }}">
-                                        {{ $jbt->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </fieldset>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tableModal"
-                            title="Open User Selection Modal"><i class="fas fa-user-plus"></i>
-                             Seleksi Pegawai
-                        </button>
-                    </div>
-                    <br>
-                    <div class="col-md-8">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="mainTable">
-                                <thead class="thead-grey">
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Nama</th>
-                                        <th>Program Studi</th>
-                                        <th>Jabatan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody style="width: 200px;" id="tabelutama" name="data_tabel">
-                                    <!-- Main table content will be populated dynamically -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <input type="hidden" id="data_tabel_input" name="data_tabel">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
-                    {{-- <button type="button" class="btn btn-primary" onclick="ambilData()">Simpan</button> --}}
+                <div class="col-md-6">
+                    <fieldset class="form-group">
+                        <label for="basicInput"><h4><strong>Pilih Auditor :</strong></h4></label>
+                        <select class="form-control" id="jabatan_id" name="jabatan_id">
+                            @foreach ($roles as $jbt)
+                                <option value="{{ $jbt->id }}">
+                                    {{ $jbt->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </fieldset>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tableModal"
+                        title="Open User Selection Modal"><i class="fas fa-user-plus"></i>
+                        Seleksi Pegawai
+                    </button>
                 </div>
-            </form>
+                <br>
+                <div class="col-md-8">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="mainTable">
+                            <thead class="thead-grey">
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Nama</th>
+                                    <th>Program Studi</th>
+                                    <th>Jabatan</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody style="width: 200px;" id="tabelutama" name="data_tabel">
+                                <!-- Main table content will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <input type="hidden" id="data_tabel_input" name="data_tabel">
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                {{-- <button type="button" class="btn btn-primary" onclick="ambilData()">Simpan</button> --}}
         </div>
+        </form>
+    </div>
     </div>
 
 
@@ -85,7 +85,7 @@
                                         <div style="width: 200px;">
                                             {{ $sr->nama  }}
                                         </div>
-                                    
+
                                     </td>
                                     <td>{{ $sr->prodi->nama }}</td>
                                     <td>
@@ -96,8 +96,8 @@
                                     <td>
                                         <button class="btn btn-success"
                                             onclick="pilihData('{{ $sr->id }}//{{ $sr->nama }}//{{ $sr->prodi->nama }}//{{ $sr->roles->first()->name }}')">Pilih</button>
-                                            <input type="hidden" name="data[{{ $sr->id }}][id]" value="{{ $sr->id }}">
-                                            
+                                        <input type="hidden" name="data[{{ $sr->id }}][id]" value="{{ $sr->id }}">
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -165,7 +165,7 @@
             // Perbarui nilai input tersembunyi dengan data sebagai array langsung
             $("#data_tabel_input").val(JSON.stringify(array_data));
         }
-        
+
     </script>
 
 

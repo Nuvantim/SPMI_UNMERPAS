@@ -10,7 +10,10 @@ use Laravel\Sanctum\HasApiTokens;
 
 class pegawai extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+
     protected $table = 'pegawai';
     protected $guarded = ['id'];
 
@@ -27,6 +30,7 @@ class pegawai extends Model
     {
         return $this->belongsTo(jabatan::class);
     }
+
     public function prodi()
     {
         return $this->belongsTo(prodi::class);

@@ -9,5 +9,6 @@ class jenis extends Model
 {
     protected $table = 'jenis';
     public $timestamps = false;
+
     use HasFactory;
 }

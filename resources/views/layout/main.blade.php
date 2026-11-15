@@ -82,10 +82,10 @@
     <!-- sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-     <!-- Include FilePond CSS and JS CDN -->
-     <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet">
-     <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
-     <!-- Load FilePond Plugin: File Validate Type -->
+    <!-- Include FilePond CSS and JS CDN -->
+    <link href="https://unpkg.com/filepond/dist/filepond.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    <!-- Load FilePond Plugin: File Validate Type -->
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <!-- Load FilePond Plugin: File Validate Size -->
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
@@ -102,8 +102,8 @@
         })
     </script>
 
-     {{-- data table --}}
-     <script>
+    {{-- data table --}}
+    <script>
         $(document).ready(function() {
             // Inisialisasi DataTable
             var dataTable = $('#basic-datatables').DataTable();

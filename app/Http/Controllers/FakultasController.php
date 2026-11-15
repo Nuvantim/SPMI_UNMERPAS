@@ -30,7 +30,7 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        $fakultass = new fakultas;
+        $fakultass = new fakultas();
         $fakultass->nama = $request->nama;
         $fakultass->save();
         Alert::success('Sukses', 'Fakultas Ditambahkan');
@@ -71,16 +71,14 @@ class FakultasController extends Controller
     public function destroy($fakultas)
     {
         // tambahkan alert warning di blade
-        try
-        {
+        try {
             $fk = Fakultas::find($fakultas);
             $fk->delete();
             Alert::success('Sukses', 'Fakultas Terhapus');
             return redirect()->route('fakultas.index');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             Alert::error('Gagal', 'Tindakan ditolak');
             return redirect()->route('fakultas.index');
         }
-
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\user;
 use App\Models\jabatan;
 use App\Models\prodi;
-use Illuminate\Support\Facades\Hash;
+use App\Models\user;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PegawaiController extends Controller
 {
@@ -15,7 +15,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawai = User::where('id','not like',1)->get();
+        $pegawai = User::where('id', 'not like', 1)->get();
         return view('admin.pegawai.pegawai', compact('pegawai'));
     }
 
@@ -26,7 +26,7 @@ class PegawaiController extends Controller
     {
         $jabatan = Jabatan::get();
         $prodi = Prodi::get();
-        return view('admin.pegawai.tambah_pegawai', compact('jabatan','prodi'));
+        return view('admin.pegawai.tambah_pegawai', compact('jabatan', 'prodi'));
     }
 
     /**
@@ -35,7 +35,7 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        $pegawai = new User;
+        $pegawai = new User();
         $pegawai->nama = $request->nama;
         $pegawai->email = $request->email;
         $pegawai->password = bcrypt($request->password);
@@ -62,7 +62,7 @@ class PegawaiController extends Controller
         $pegawai = User::find($user);
         $jabatan = Jabatan::get();
         $prodi = Prodi::get();
-        return view('admin.pegawai.edit_pegawai', compact('pegawai','jabatan', 'prodi'));
+        return view('admin.pegawai.edit_pegawai', compact('pegawai', 'jabatan', 'prodi'));
     }
 
     /**
@@ -71,8 +71,7 @@ class PegawaiController extends Controller
     public function update(Request $request, $pegawai)
     {
         $pegawai = User::find($pegawai);
-        if (!empty($request->password ))
-        {
+        if (!empty($request->password)) {
             $pegawai->nama = $request->nama;
             $pegawai->email = $request->email;
             $pegawai->password = bcrypt($request->password);
@@ -81,7 +80,7 @@ class PegawaiController extends Controller
             $pegawai->status = $request->status;
             $pegawai->save();
             return redirect()->route('pegawai.index');
-        }else{
+        } else {
             $pegawai->nama = $request->nama;
             $pegawai->email = $request->email;
             $pegawai->jabatan_id = $request->jabatan_id;

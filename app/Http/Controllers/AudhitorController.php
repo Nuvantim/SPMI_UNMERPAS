@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 
@@ -16,12 +16,11 @@ class AudhitorController extends Controller
 
         foreach ($users as $user) {
             $roles = $user->getRoleNames();
-        
-            if (count($roles) > 1) {
 
+            if (count($roles) > 1) {
                 $audhitorRole = null;
                 $jabatanRole = null;
-        
+
                 foreach ($roles as $role) {
                     if (strpos($role, 'Auditor') !== false) {
                         $audhitorRole = $role;
@@ -29,7 +28,7 @@ class AudhitorController extends Controller
                         $jabatanRole = $role;
                     }
                 }
-        
+
                 if ($audhitorRole !== null) {
                     $pegawai_audhitor[] = [
                         'user' => $user,
@@ -39,15 +38,15 @@ class AudhitorController extends Controller
                 }
             }
         }
-        
-        return view('admin.audhitor.audhitor',compact('pegawai_audhitor'));
+
+        return view('admin.audhitor.audhitor', compact('pegawai_audhitor'));
     }
 
     public function addAudhitor()
     {
         $roles = Role::where('name', 'like', 'Auditor%')->get();
         $single_role = User::all()->filter(function ($user) {
-        return $user->id != 1 && $user->roles->count() == 1;
+            return $user->id != 1 && $user->roles->count() == 1;
         });
         return view('admin.audhitor.addAudhitor', compact('roles', 'single_role'));
     }
@@ -56,9 +55,8 @@ class AudhitorController extends Controller
     {
         $jabatan_id = $request->input('jabatan_id');
         $data_tabel = json_decode($request->input('data_tabel'), true);
-        
-        if($data_tabel != null)
-        {
+
+        if ($data_tabel != null) {
             $role = Role::findById($jabatan_id);
 
             if (is_array($data_tabel)) {
@@ -72,26 +70,23 @@ class AudhitorController extends Controller
             }
             Alert::success('Sukses', 'Data Auditor Disimpan');
             return redirect()->route('audhitor.index');
-        }else 
-        {
+        } else {
             Alert::error('Gagal', 'Data Pegawai Tidak Ditemukan');
             return redirect()->route('audhitor.create');
         }
-        
     }
 
     public function destroyAudhitor($id)
     {
         $user = User::with('roles')->find($id);
         if ($user) {
-
             $rolesToRemove = $user->roles->filter(function ($role) {
                 return str_contains($role->name, 'Auditor');
             });
             foreach ($rolesToRemove as $role) {
                 $user->removeRole($role->name);
             }
-        
+
             $user->save();
             Alert::success('Sukses', 'Auditor Dihapus');
             return redirect()->route('audhitor.index');

@@ -9,9 +9,9 @@
 
 @section('container')
     <style>
-      .toggle-col {
-        cursor: pointer;
-      }
+        .toggle-col {
+          cursor: pointer;
+        }
     </style>
     <div class="card">
         <div class="card-header">
@@ -20,29 +20,29 @@
             </button>
         </div>
         <div class="card-body">
-        <div class="mb-3">
-            <label for="basicInput"><p>Visibility Column :</p></label><br>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="1">
-            <i class="fas fa-eye-slash"></i>Standar</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="2">
-            <i class="fas fa-eye-slash"></i>Indikator</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="3">
-            <i class="fas fa-eye-slash"></i>Penetapan</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="4">
-            <i class="fas fa-eye-slash"></i>Pelaksanaan</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="5">
-            <i class="fas fa-eye-slash"></i>Tahun</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="6">
-            <i class="fas fa-eye-slash"></i>Auditor</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="7">
-            <i class="fas fa-eye-slash"></i>Evaluasi</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="8">
-            <i class="fas fa-eye-slash"></i>Komentar</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="9">
-            <i class="fas fa-eye-slash"></i>Pengendalian</button>
-            <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="10">
-            <i class="fas fa-eye-slash"></i>Peningkatan</button>
-        </div>
+            <div class="mb-3">
+                <label for="basicInput"><p>Visibility Column :</p></label><br>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="1">
+                    <i class="fas fa-eye-slash"></i>Standar</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="2">
+                    <i class="fas fa-eye-slash"></i>Indikator</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="3">
+                    <i class="fas fa-eye-slash"></i>Penetapan</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="4">
+                    <i class="fas fa-eye-slash"></i>Pelaksanaan</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="5">
+                    <i class="fas fa-eye-slash"></i>Tahun</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="6">
+                    <i class="fas fa-eye-slash"></i>Auditor</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="7">
+                    <i class="fas fa-eye-slash"></i>Evaluasi</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="8">
+                    <i class="fas fa-eye-slash"></i>Komentar</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="9">
+                    <i class="fas fa-eye-slash"></i>Pengendalian</button>
+                <button class="btn btn-outline-secondary btn-sm toggle-col" data-column="10">
+                    <i class="fas fa-eye-slash"></i>Peningkatan</button>
+            </div>
             <div class="row table-responsive">
                 <table id="contoh-datatables" class="cell-border table table-bordered table-striped" style="width=100%">
                     <thead class="thead-dark">
@@ -222,7 +222,7 @@
                                                         @csrf
                                                         <button class="dropdown-item" type="submit"><i
                                                                 class="fas fa-file-upload"></i><span> Upload
-                                                                Berkas</span></button>
+                                                            Berkas</span></button>
                                                     </form>
                                                     <form action="{{ route('berkas.delete', $bkst->id) }}" method="POST">
                                                         @csrf
@@ -234,7 +234,7 @@
                                             </div>
                                             @if (
                                                 $bkst->pengisian_berkas->where('jenis', 'Penetapan')->isNotEmpty() &&
-                                                    $bkst->pengisian_berkas->where('jenis', 'Pelaksanaan')->isNotEmpty())
+                                                $bkst->pengisian_berkas->where('jenis', 'Pelaksanaan')->isNotEmpty())
                                                 <form action="{{ route('berkas.valid', $bkst->id) }}" method="POST"
                                                     class="d-inline">
                                                     @csrf
@@ -250,13 +250,13 @@
                                             <i class="fas fa-exclamation-triangle mr-1"></i>
                                             <strong>Proses Penilaian</strong>
                                         </div>
-                                        {{-- sudah dinilai --}}
+                                    {{-- sudah dinilai --}}
                                     @elseif ($bkst->aksi_code == 2)
                                         <div class="alert alert-success" role="alert">
                                             <i class="fa fa-check mr-1"></i>
                                             <strong>Penilaian Selesai</strong>
                                         </div>
-                                        {{-- upload peningkatan --}}
+                                    {{-- upload peningkatan --}}
                                     @elseif ($bkst->aksi_code == 3)
                                         <div class="d-flex center-content-between">
                                             <form action="{{ route('berkas.peningkatan', $bkst->id) }}" method="POST">

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Spatie\Permission\Models\Role;
 use App\Models\prodi;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\User;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -16,8 +16,8 @@ class UserController extends Controller
     public function index()
     {
         $pegawai = User::with('roles')->whereDoesntHave('roles', function ($query) {
-                    $query->where('name', 'Admin');
-                })->get();
+            $query->where('name', 'Admin');
+        })->get();
         return view('admin.pegawai.pegawai', compact('pegawai'));
     }
 
@@ -26,9 +26,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        $jabatan = Role::where('name','not like','%auditor%')->where('name','not like','%Admin%')->orderBy('id', 'desc')->get();
+        $jabatan = Role::where('name', 'not like', '%auditor%')
+            ->where('name', 'not like', '%Admin%')
+            ->orderBy('id', 'desc')
+            ->get();
         $prodi = Prodi::get();
-        return view('admin.pegawai.tambah_pegawai', compact('jabatan','prodi'));
+        return view('admin.pegawai.tambah_pegawai', compact('jabatan', 'prodi'));
     }
 
     /**
@@ -37,18 +40,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $duplikat = User::where('email', $request->email)->first();
-        if($duplikat)
-        {
+        if ($duplikat) {
             Alert::error('Gagal', 'Email sudah terdaftar');
             return redirect()->route('pegawai.index');
-        }else
-        {
-            $user = new User;
-            $user->prodi_id= $request->prodi_id;
-            $user->nama= $request->nama;
-            $user->email= $request->email;
-            $user->password= bcrypt($request->password);
-            $user->status= $request->status;
+        } else {
+            $user = new User();
+            $user->prodi_id = $request->prodi_id;
+            $user->nama = $request->nama;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->status = $request->status;
             $user->save();
 
             $role = Role::findById($request->jabatan_id);
@@ -56,7 +57,6 @@ class UserController extends Controller
             Alert::success('Sukses', 'Data Pegawai Tersimpan');
             return redirect()->route('pegawai.index');
         }
-
     }
 
     /**
@@ -73,9 +73,12 @@ class UserController extends Controller
     public function edit($user)
     {
         $pegawai = User::find($user);
-        $jabatan = Role::where('name','not like','%auditor%')->where('name','not like','%Admin%')->orderBy('id', 'desc')->get();
+        $jabatan = Role::where('name', 'not like', '%auditor%')
+            ->where('name', 'not like', '%Admin%')
+            ->orderBy('id', 'desc')
+            ->get();
         $prodi = Prodi::get();
-        return view('admin.pegawai.edit_pegawai', compact('pegawai','jabatan', 'prodi'));
+        return view('admin.pegawai.edit_pegawai', compact('pegawai', 'jabatan', 'prodi'));
     }
 
     /**
@@ -84,29 +87,27 @@ class UserController extends Controller
     public function update(Request $request, $user)
     {
         $pegawai = User::find($user);
-        if($request->email != $pegawai->email){
-            $cek_email = User::where('email',$request->email)->first();
-            if($cek_email){
+        if ($request->email != $pegawai->email) {
+            $cek_email = User::where('email', $request->email)->first();
+            if ($cek_email) {
                 Alert::error('Gagal', 'Email telah terdaftar');
                 return back();
-            }else{
-                if (!empty($request->password ))
-                {
-                    $pegawai->prodi_id= $request->prodi_id;
-                    $pegawai->nama= $request->nama;
-                    $pegawai->email= $request->email;
-                    $pegawai->password= bcrypt($request->password);
-                    $pegawai->status= $request->status;
+            } else {
+                if (!empty($request->password)) {
+                    $pegawai->prodi_id = $request->prodi_id;
+                    $pegawai->nama = $request->nama;
+                    $pegawai->email = $request->email;
+                    $pegawai->password = bcrypt($request->password);
+                    $pegawai->status = $request->status;
                     $pegawai->save();
-                }else{
-                    $pegawai->prodi_id= $request->prodi_id;
-                    $pegawai->nama= $request->nama;
-                    $pegawai->email= $request->email;
-                    $pegawai->status= $request->status;
+                } else {
+                    $pegawai->prodi_id = $request->prodi_id;
+                    $pegawai->nama = $request->nama;
+                    $pegawai->email = $request->email;
+                    $pegawai->status = $request->status;
                     $pegawai->save();
                 }
             }
-
         }
         $role = Role::findById($request->jabatan_id);
         $pegawai->syncRoles([$role->id]);
@@ -120,18 +121,16 @@ class UserController extends Controller
     public function destroy($user)
     {
         $pegawai = User::find($user);
-        if($pegawai){
-            try{
+        if ($pegawai) {
+            try {
                 $pegawai->delete();
                 $pegawai->syncRoles([]);
                 Alert::success('Sukses', 'Data Pegawai Dihapus');
                 return redirect()->route('pegawai.index');
-            }catch(\Exception $e)
-            {
+            } catch (\Exception $e) {
                 Alert::Error('Gagal', 'Tindakan Ditolak');
                 return redirect()->route('pegawai.index');
             }
         }
-
     }
 }
